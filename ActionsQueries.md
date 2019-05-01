@@ -4,7 +4,7 @@ Query
         Method:
             GET
         URL:
-            /customer_service/{customer_id}/items
+              /create_claim/{customerID,flightID,baggageID,"itemList"}
         Inputs:
             Claim ID
         Response:
@@ -19,6 +19,10 @@ Query
     
 Action
     Create Lost Baggage Claim
+        Method:
+            POST
+        URL:
+            /track_claim/{claimId}
         Input:
             customer_id
             flight ID
