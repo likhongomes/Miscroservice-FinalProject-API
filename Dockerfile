@@ -10,4 +10,4 @@ RUN apk upgrade --update \
   && apk add make \
   && npm i -g redoc-cli
 
-CMD redoc-cli bundle -ssr -o docs/index.html specs/api.yml ; touch /app/docs/sample-file-created-in-container.txt
+CMD redoc-cli bundle -o docs/index.html specs/api.yml
