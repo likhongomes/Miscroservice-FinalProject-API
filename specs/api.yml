@@ -11,7 +11,7 @@ info:
   title: Lost Baggage Claim API
   version: 1.0.0
 paths:
-  /create_claim/{customerID,flightID,baggageID,"itemList"}:
+  /create_claim/{customerID,flightID,baggageID,itemList}:
     post:
       summary: Create a new baggage claim
       description: |
@@ -81,15 +81,13 @@ paths:
               schema:
                 type: object
                 properties:
-                  customerID:
-                    type: array
-                    items:
-                      type: string
+                  claimID:
+                    type: string
                     example: 
                       - "6a05e510-12ee-47b1-a7a7-2e4259d24809"
         '500': 
           description: |
-            Returns detailed error explanation in case event store was unable
+            Returns detailed error explanation in baggage claim was unable
             to fulfil the request
           content:
             application/json:
@@ -98,7 +96,7 @@ paths:
         '400':
           description: |
             Returns detailed error explanation in case client submitted invalid
-            data to the event store
+            data to the baggage claim
           content:
             application/json:
               schema:
@@ -128,10 +126,36 @@ paths:
                 items:
                   type: object
                   properties: 
-                    eventId: 
+                    claimID: 
                       type: string
+                      example: "af04e7c0-1a57-44bc-81a4-d8b3fd0f0f56"
                     data:
                       type: object 
+                      example: {
+                        "customerID": "a1d5b69e-aefb-4a39-ae5c-affbe6961d60",
+                        "flightID": "9f0bbc6a-f199-4238-91f5-15215c0971fe",
+                        "baggageID": {"bag1":"5ca95c1b5eb664a11584f8cd"},
+                        "itemList": {
+                        "item1":"Black Samsonite Lugguage"
+                        },
+                        "status": "Inquery ongoing",
+                    }
+        '500': 
+          description: |
+            Returns detailed error explanation in case baggage claim was unable
+            to fulfil the request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorObject'
+        '400':
+          description: |
+            Returns detailed error explanation in case client submitted invalid
+            data to the baggage claim
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorObject'
                 # examples syntax: https://swagger.io/docs/specification/2-0/adding-examples/                    
                 example:
                   - claimID: af04e7c0-1a57-44bc-81a4-d8b3fd0f0f56
