@@ -11,7 +11,7 @@ info:
   title: Lost Baggage Claim API
   version: 1.0.0
 paths:
-  /create_claim/{customerID,flightID,baggageID,itemList}:
+  /claims:
     post:
       summary: Create a new baggage claim
       description: |
@@ -102,7 +102,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorObject'
 
-  /track_claim/{claimId}:
+  /claims/{claimId}:
     get:
       summary: Get Lost Baggage Claim
       description: |
